@@ -1,17 +1,22 @@
-<h1>New book</h1>
-  <%= form_with model:@book do |f|%>
-    <h3>title</h3>
-      <%= f.text_field :book_title %>
-    <h3>Opinion</h3>
-      <%= f.text_area :caption %>
-    <%= f.submit 'Create Book' %>
-  <% end %>
+<%= render 'list', user: @user %>
+<%= render 'list2', book: @book %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
   <% @books.each do |book| %>
   <div>
-    <p>yu-za-gazou</p>
+    <p><%= image_tag book.user.get_profile_image(100,100) %></p>
     <p><%= book.user.name %></p>
-    <p><%= book.book_title %></p>
+    <%= link_to book_path(book.id) do %>
+      <p><%= book.title %></p>
+    <% end %>
     <p><%= book.caption %></p>
   </div>
   <% end %>
+  <%= paginate @books %>
