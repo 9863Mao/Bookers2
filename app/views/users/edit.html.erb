@@ -1,6 +1,6 @@
 <h1>User info</h1>
 <% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
+  <%= @user.errors.count %> error
   <ul>
     <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>
